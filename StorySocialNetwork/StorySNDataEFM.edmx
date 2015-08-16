@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StorySNDataEFM.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="StorySNDataEFMStoreContainer">
+          <EntitySet Name="Groups" EntityType="StorySNDataEFM.Store.Groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GroupStory" EntityType="StorySNDataEFM.Store.GroupStory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Stories" EntityType="StorySNDataEFM.Store.Stories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="StorySNDataEFM.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="StorySNDataEFM.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_GroupStory_Groups" Association="StorySNDataEFM.Store.FK_GroupStory_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupStory" EntitySet="GroupStory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupStory_Stories" Association="StorySNDataEFM.Store.FK_GroupStory_Stories">
+            <End Role="Stories" EntitySet="Stories" />
+            <End Role="GroupStory" EntitySet="GroupStory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stories_Users" Association="StorySNDataEFM.Store.FK_Stories_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Stories" EntitySet="Stories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="GroupStory">
+          <Key>
+            <PropertyRef Name="GroupID" />
+            <PropertyRef Name="StoryID" />
+          </Key>
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="StoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="StoryContent" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="PostedOn" Type="datetime" Nullable="false" />
+          <Property Name="UsersID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="15" />
+        </EntityType>
+        <Association Name="FK_GroupStory_Groups">
+          <End Role="Groups" Type="StorySNDataEFM.Store.Groups" Multiplicity="1" />
+          <End Role="GroupStory" Type="StorySNDataEFM.Store.GroupStory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupStory">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupStory_Stories">
+          <End Role="Stories" Type="StorySNDataEFM.Store.Stories" Multiplicity="1" />
+          <End Role="GroupStory" Type="StorySNDataEFM.Store.GroupStory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupStory">
+              <PropertyRef Name="StoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stories_Users">
+          <End Role="Users" Type="StorySNDataEFM.Store.Users" Multiplicity="1" />
+          <End Role="Stories" Type="StorySNDataEFM.Store.Stories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Stories">
+              <PropertyRef Name="UsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="StorySNDataEFM" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="StorySNDataEFMContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Groups" EntityType="StorySNDataEFM.Group" />
+          <EntitySet Name="Stories" EntityType="StorySNDataEFM.Story" />
+          <EntitySet Name="sysdiagrams" EntityType="StorySNDataEFM.sysdiagram" />
+          <EntitySet Name="Users" EntityType="StorySNDataEFM.User" />
+          <AssociationSet Name="FK_Stories_Users" Association="StorySNDataEFM.FK_Stories_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Story" EntitySet="Stories" />
+          </AssociationSet>
+          <AssociationSet Name="GroupStory" Association="StorySNDataEFM.GroupStory">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Story" EntitySet="Stories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Stories" Relationship="StorySNDataEFM.GroupStory" FromRole="Group" ToRole="Story" />
+        </EntityType>
+        <EntityType Name="Story">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="StoryContent" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="PostedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UsersID" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="StorySNDataEFM.FK_Stories_Users" FromRole="Story" ToRole="User" />
+          <NavigationProperty Name="Groups" Relationship="StorySNDataEFM.GroupStory" FromRole="Story" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Stories" Relationship="StorySNDataEFM.FK_Stories_Users" FromRole="User" ToRole="Story" />
+        </EntityType>
+        <Association Name="FK_Stories_Users">
+          <End Type="StorySNDataEFM.User" Role="User" Multiplicity="1" />
+          <End Type="StorySNDataEFM.Story" Role="Story" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Story">
+              <PropertyRef Name="UsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupStory">
+          <End Type="StorySNDataEFM.Group" Role="Group" Multiplicity="*" />
+          <End Type="StorySNDataEFM.Story" Role="Story" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="StorySNDataEFM" />
+        <Alias Key="Target" Value="StorySNDataEFM.Store" />
+        <EntityContainerMapping CdmEntityContainer="StorySNDataEFMContainer" StorageEntityContainer="StorySNDataEFMStoreContainer">
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="StorySNDataEFM.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stories">
+            <EntityTypeMapping TypeName="StorySNDataEFM.Story">
+              <MappingFragment StoreEntitySet="Stories">
+                <ScalarProperty Name="UsersID" ColumnName="UsersID" />
+                <ScalarProperty Name="PostedOn" ColumnName="PostedOn" />
+                <ScalarProperty Name="StoryContent" ColumnName="StoryContent" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StorySNDataEFM.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="StorySNDataEFM.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="GroupStory" TypeName="StorySNDataEFM.GroupStory" StoreEntitySet="GroupStory">
+            <EndProperty Name="Story">
+              <ScalarProperty Name="id" ColumnName="StoryID" />
+            </EndProperty>
+            <EndProperty Name="Group">
+              <ScalarProperty Name="id" ColumnName="GroupID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

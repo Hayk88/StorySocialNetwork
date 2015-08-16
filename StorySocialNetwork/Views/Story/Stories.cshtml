@@ -1,0 +1,23 @@
+﻿@model List<StorySocialNetwork.Models.StoryModel> 
+@{
+    ViewBag.Title = "Stories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="story_container">
+    @Html.ActionLink("Create Story", "AddEditStory", new object { }, new { @class = "site_button" })
+    <div class="cb"></div>
+    <div class="stories_list">
+        @foreach (var item in Model)
+        {
+        <div class="story">
+            <div class="story_title">@item.Title</div>
+             @Html.ActionLink("Edit Story", "AddEditStory", "Story" , new  { id = item.id }, new { @class = "site_button" })
+             <div class="cb"></div>
+            <div class="stroy_Description">@item.Description</div>
+                @Html.ActionLink("More", "Story", "Story" , new  { id = item.id }, new { @class = "site_button" })
+             <div class="cb"></div>
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿@model List<StorySocialNetwork.Models.GroupModel>
+@{
+    ViewBag.Title = "Groups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="groups_container">
+    <div class="group">
+        <div class="group_item group_header_item">Name</div>
+        <div class="group_item group_header_item">Description</div>
+        <div class="group_item group_header_item">Stories Count</div>
+        <div class="group_item group_header_item">Users Count</div>
+        <div class="cb"></div>
+    </div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="group">
+
+            <div class="group_item">@Model[i].Name</div>
+            <div class="group_item">@Model[i].Description</div>
+            <div class="group_item">@Model[i].StoriesCount</div>
+            <div class="group_item">@Model[i].UsersCount</div>
+            <div class="cb"></div>
+
+        </div>
+    }
+</div>

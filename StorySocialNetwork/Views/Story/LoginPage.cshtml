@@ -1,0 +1,43 @@
+﻿@model StorySocialNetwork.Models.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <script type="text/javascript">
+        function submitForm() {
+            $('#login_form').submit();
+        }
+    </script>
+    <div>
+        @using (Html.BeginForm("Login", "Story", FormMethod.Post, new { @id = "login_form" }))
+        {
+            <div class="story_inputs_block">
+                <div class="story_input_title">
+                    Login
+                </div>
+                @Html.TextBoxFor(x => x.Login, new { @class = "story_input" })
+                <div class="cb"></div>
+            </div>
+            <div class="story_inputs_block">
+                <div class="story_input_title">
+                    Password
+                </div>
+                @Html.PasswordFor(x => x.Password, new { @class = "story_input" })
+                <div class="cb"></div>
+            </div>
+            <div onclick="submitForm()" class="site_button">Login</div>
+        }
+    </div>
+</body>
+</html>

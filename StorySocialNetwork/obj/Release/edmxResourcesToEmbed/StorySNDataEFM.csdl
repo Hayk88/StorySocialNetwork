@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="StorySNDataEFM" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="StorySNDataEFMContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Groups" EntityType="StorySNDataEFM.Group" />
+    <EntitySet Name="Stories" EntityType="StorySNDataEFM.Story" />
+    <EntitySet Name="sysdiagrams" EntityType="StorySNDataEFM.sysdiagram" />
+    <EntitySet Name="Users" EntityType="StorySNDataEFM.User" />
+    <AssociationSet Name="FK_Stories_Users" Association="StorySNDataEFM.FK_Stories_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Story" EntitySet="Stories" />
+    </AssociationSet>
+    <AssociationSet Name="GroupStory" Association="StorySNDataEFM.GroupStory">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Story" EntitySet="Stories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Stories" Relationship="StorySNDataEFM.GroupStory" FromRole="Group" ToRole="Story" />
+  </EntityType>
+  <EntityType Name="Story">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="StoryContent" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="PostedOn" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="UsersID" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="StorySNDataEFM.FK_Stories_Users" FromRole="Story" ToRole="User" />
+    <NavigationProperty Name="Groups" Relationship="StorySNDataEFM.GroupStory" FromRole="Story" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="principal_id" Nullable="false" />
+    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="version" />
+    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Stories" Relationship="StorySNDataEFM.FK_Stories_Users" FromRole="User" ToRole="Story" />
+  </EntityType>
+  <Association Name="FK_Stories_Users">
+    <End Type="StorySNDataEFM.User" Role="User" Multiplicity="1" />
+    <End Type="StorySNDataEFM.Story" Role="Story" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Story">
+        <PropertyRef Name="UsersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GroupStory">
+    <End Type="StorySNDataEFM.Group" Role="Group" Multiplicity="*" />
+    <End Type="StorySNDataEFM.Story" Role="Story" Multiplicity="*" />
+  </Association>
+</Schema>

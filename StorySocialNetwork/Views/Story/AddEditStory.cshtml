@@ -1,0 +1,82 @@
+﻿@model StorySocialNetwork.Models.StoryModel
+@{
+    ViewBag.Title = "AddEditStory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    function openGroupsMultiSelect(el) {
+        var popup = $(el).next();
+        if (popup.is(':visible')) {
+            popup.hide();
+        }
+        else {
+            popup.show();
+        }
+    }
+    function submitForm() {
+        var isValid = true;
+        if ($('.groupe_multi_select_item input[type="checkbox"]:checked').length == 0) {
+            isValid = false;
+
+            $('.groupe_multi_select_container').show();
+            $('.cheackbox_valitation').show();
+        }
+
+        if (isValid) {
+            $('#save_story_form').submit();
+        }
+    }
+
+</script>
+
+<div class="addEdit_container">
+
+    @using (Html.BeginForm("StorySave", "Story", FormMethod.Post, new { @id = "save_story_form" }))
+    {
+        <div class="site_button groupe_multi_select_button" onclick="openGroupsMultiSelect(this)">Select groups</div>
+        <div class="groupe_multi_select_container">
+
+            <div class="group_multi_select_header_item">Groups</div>
+            <div class="cheackbox_valitation">*</div>
+            <div class="cb"></div>
+            @for (int i = 0; i < Model.Groups.Count; i++)
+            {
+                <div class="groupe_multi_select_item">
+                    @Html.CheckBoxFor(m => m.Groups[i].isSelected, new { @checked = "checked" })
+                    @Html.HiddenFor(m => m.Groups[i].id)
+                    @Html.DisplayFor(m => m.Groups[i].Name)
+
+                </div>
+            }
+        </div>
+        <div class="cb"></div>
+        @Html.HiddenFor(x => x.id)
+        <div class="story_inputs_block">
+            <div class="story_input_title">
+                Title
+            </div>
+            @Html.TextBoxFor(x => x.Title, new { @class = "story_input" })
+            <div class="cb"></div>
+        </div>
+        <div class="story_inputs_block">
+            <div class="story_input_title">
+                Description
+            </div>
+            @Html.TextAreaFor(x => x.Description, new { @class = "story_input" })
+            <div class="cb"></div>
+        </div>
+        <div class="story_inputs_block">
+            <div class="story_input_title">
+                Content
+            </div>
+            @Html.TextAreaFor(x => x.StoryContent, new { @class = "story_input" })
+            <div class="cb"></div>
+        </div>
+        <div class="cb"></div>
+       
+        <div onclick="submitForm()" class="site_button">Save </div>
+        <div class="cb"></div>
+    }
+</div>
