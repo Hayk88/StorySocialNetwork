@@ -7,3 +7,4 @@ W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibr
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\EntityFramework.SqlServer.dll
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\EntityFramework.xml
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\EntityFramework.SqlServer.xml
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\obj\Debug\StortyBack.csprojResolveAssemblyReference.cache

@@ -1,5 +1,56 @@
-﻿$(document).on("click", ".close_popup", function () {
+﻿
+isStoriesCount = false;
+isUserCount = false;
+
+$(document).on("click", ".close_popup", function () {
     $('#popup_container').empty();
+    hideBack();
+});
+$(document).on("click", ".stories_count_sort", function () {
+    var usersCounts = [];
+    var groups = $(".groups_row_container .group");
+    $(".groups_row_container .group").each(function (index) {
+        usersCounts[usersCounts.length] = parseFloat($(this).find('.stories_count').attr('count'));
+    });
+    var sortGroupe = usersCounts.sort();
+    $('.groups_row_container').empty();
+
+    if (isStoriesCount) {
+        sortGroupe.reverse();
+        isStoriesCount = false;
+    }
+    else {
+        isStoriesCount = true;
+    }
+    for (var i = 0; i < sortGroupe.length; i++) {
+        var el = groups.find(".stories_count[count='" + sortGroupe[i] + "']");
+        $('.groups_row_container').append(el.parent());
+    }
+
+});
+
+$(document).on("click", ".users_count_sort", function () {
+    var usersCounts = [];
+    var groups = $(".groups_row_container .group");
+    $(".groups_row_container .group").each(function (index) {
+        usersCounts[usersCounts.length] = parseFloat($(this).find('.users_count').attr('count'));
+    });
+    var sortGroupe = usersCounts.sort();
+    $('.groups_row_container').empty();
+    
+
+    if (isUserCount) {
+        sortGroupe.reverse();
+        isUserCount = false;
+    }
+    else {
+        isUserCount = true;
+    }
+    for (var i = 0; i < sortGroupe.length; i++) {
+        var el = groups.find(".users_count[count='" + sortGroupe[i] + "']");
+        $('.groups_row_container').append(el.parent());
+    }
+
 });
 
 $(function () {
@@ -14,6 +65,14 @@ function showLoader() {
 
 function hideLoader() {
     $('#loading').hide();
+}
+
+function showBack() {
+    $('#back').show();
+}
+
+function hideBack() {
+    $('#back').hide();
 }
 
 function Search(serachText) {
