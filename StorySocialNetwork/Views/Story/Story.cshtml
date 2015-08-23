@@ -1,11 +1,9 @@
 ﻿@model StorySocialNetwork.Models.StoryModel
-@{
-    ViewBag.Title = "Story";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 <div class="story_details_title story_details_item">@Model.Title</div>
 <div class="cb"></div>
 <div class="stroy_details_description story_details_item">@Model.Description</div>
 <div class="cb"></div>
 <div class="story_details_content story_details_item">@Model.StoryContent</div>
+<div class="cb"></div>
+<div class="site_button close_popup" style="float: right;">Close</div>

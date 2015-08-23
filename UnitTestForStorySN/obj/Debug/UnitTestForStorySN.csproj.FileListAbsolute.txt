@@ -23,3 +23,5 @@ W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\UnitTestF
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\UnitTestForStorySN\bin\Debug\EntityFramework.SqlServer.dll
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\UnitTestForStorySN\bin\Debug\EntityFramework.SqlServer.xml
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\UnitTestForStorySN\bin\Debug\GenericTest1.GenericTest
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\UnitTestForStorySN\bin\Debug\ClassLibrary1.dll
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\UnitTestForStorySN\bin\Debug\ClassLibrary1.pdb

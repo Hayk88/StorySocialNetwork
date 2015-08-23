@@ -29,3 +29,5 @@ W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\StorySoci
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\StorySocialNetwork\obj\Debug\StorySocialNetwork.dll
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\StorySocialNetwork\obj\Debug\StorySocialNetwork.pdb
 W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\StorySocialNetwork\obj\Debug\StorySocialNetwork.csprojResolveAssemblyReference.cache
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\StorySocialNetwork\bin\ClassLibrary1.dll
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\StorySocialNetwork\bin\ClassLibrary1.pdb

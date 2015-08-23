@@ -1,0 +1,9 @@
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\ClassLibrary1.dll.config
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\EntityFramework.dll
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\EntityFramework.SqlServer.dll
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\EntityFramework.xml
+W:\Users\Hayk\Documents\Visual Studio 2012\Projects\StorySocialNetwork\ClassLibrary1\bin\Debug\EntityFramework.SqlServer.xml

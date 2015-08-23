@@ -1,4 +1,5 @@
-﻿using StorySocialNetwork.Models;
+﻿using StortyBack.Data;
+using StorySocialNetwork.Models;
 using StorySocialNetwork.StorySNData;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ namespace StorySocialNetwork.Controllers
         //
         // GET: /Story/
 
-        StoryData sd = new StoryData();
-       
+        StoryDataConvert convert = new StoryDataConvert();
+        
         public ActionResult LoginPage()
         {
             return View();
@@ -23,7 +24,9 @@ namespace StorySocialNetwork.Controllers
 
         public ActionResult Login(LoginModel lm)
         {
-            var userId = sd.CheckLogin(lm);
+            UserData ud = new UserData();
+            ud = convert.UserModelToData(lm);
+            var userId = ud.CheckLogin(ud);
             if (userId > 0)
             {
                 FormsAuthentication.SetAuthCookie(userId.ToString(), false);
@@ -46,36 +49,63 @@ namespace StorySocialNetwork.Controllers
         [Authorize]
         public ActionResult Stories()
         {
+            StoryData sd = new StoryData();
             var userID = Convert.ToInt32(User.Identity.Name);
-            List<StoryModel> stories = sd.GetStories(userID);
+            List<StoryModel> stories =   new List<StoryModel>();
+            List<StoryData>  sds = sd.GetStories(userID);
+            foreach (var item in sds)
+            {
+                stories.Add(convert.StoryDataToModel(item));
+            }
+
             return View(stories);
         }
 
         [Authorize]
         public ActionResult Groups()
         {
-            var grModel = sd.GetGroupsInfo();
+            GroupData gd = new GroupData();
+            var gds = gd.GetGroupsInfo();
+            List<GroupModel> grModel = new List<GroupModel>();
+            foreach (var item in gds)
+            {
+                grModel.Add(convert.GroupDataToModel(item));
+            }
+
             return View(grModel);
         }
 
         [Authorize]
-        public ActionResult Story(int id)
+        [HttpPost]
+        public ActionResult GetStory(int id)
         {
+            StoryData sd = new StoryData();
             StoryModel sm = new StoryModel();
-            sm = sd.GetStory(id);
+            sm = convert.StoryDataToModel(sd.GetStory(id));
 
-            return View(sm);
+            return PartialView("Story",sm);
         }
 
         [Authorize]
         public ActionResult AddEditStory(int? id)
         {
+            StoryData sd = new StoryData();
             StoryModel sm = new StoryModel();
             if (id != null)
             {
-                sm = sd.GetStory(id.Value);
+                sm = convert.StoryDataToModel( sd.GetStory(id.Value));
             }
-            sm.Groups = sd.GetGroups(id);
+
+            GroupData gd = new GroupData();
+            var gds = gd.GetGroups(id);
+            List<GroupModel> grModel = new List<GroupModel>();
+            foreach (var item in gds)
+            {
+                grModel.Add(convert.GroupDataToModel(item));
+            }
+
+            sm.Groups = grModel;
+
             return View(sm);
         }
 
@@ -83,8 +113,10 @@ namespace StorySocialNetwork.Controllers
         [Authorize]
         public ActionResult StorySave(StoryModel model)
         {
-            model.UserID = Convert.ToInt32(User.Identity.Name); ;
-            var result = sd.SaveStory(model);
+            model.UserID = Convert.ToInt32(User.Identity.Name);
+            StoryData sd = new StoryData();
+            sd = convert.StoryModelToData(model);
+            var result = sd.SaveStory(sd);
 
             string action ;
             if (result)

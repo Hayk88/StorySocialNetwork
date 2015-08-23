@@ -1,23 +1,50 @@
-﻿@model List<StorySocialNetwork.Models.StoryModel> 
+﻿@model List<StorySocialNetwork.Models.StoryModel>
 @{
     ViewBag.Title = "Stories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript">
+    function openStory(storyID) {
+
+        $.ajax({
+            url: '@Url.Content("~/Story/GetStory")',
+             type: 'POST',
+             contentType: 'application/json',
+             data: JSON.stringify({ id: storyID}),
+                success: function (data) {
+                    $('#popup_container').empty();
+                    $('#popup_container').append(data);
+                }
+
+         });
+    };
+</script>
+
 <div class="story_container">
     @Html.ActionLink("Create Story", "AddEditStory", new object { }, new { @class = "site_button" })
+    <input  type="text" placeholder="Search" class="story_input" onkeyup="Search(this)"/>
     <div class="cb"></div>
-    <div class="stories_list">
+    <ul class="stories_list" id="stories_list">
         @foreach (var item in Model)
         {
-        <div class="story">
-            <div class="story_title">@item.Title</div>
-             @Html.ActionLink("Edit Story", "AddEditStory", "Story" , new  { id = item.id }, new { @class = "site_button" })
-             <div class="cb"></div>
-            <div class="stroy_Description">@item.Description</div>
-                @Html.ActionLink("More", "Story", "Story" , new  { id = item.id }, new { @class = "site_button" })
-             <div class="cb"></div>
-        </div>
+            <li class="story">
+                <div class="story_title">@item.Title</div>
+                @Html.ActionLink("Edit Story", "AddEditStory", "Story" , new  { id = item.id }, new { @class = "site_button" })
+                
+                <div class="cb"></div>
+                <div class="stroy_Description">@item.Description</div>
+                <div class="cb"></div>
+                <div class="site_button" onclick="openStory(@item.id)">More</div>
+                @*@Html.ActionLink("More", "Story", "Story" , new  { id = item.id }, new { @class = "site_button" })*@
+                <div class="cb"></div>
+                <div class="stroy_date">@String.Format("{0:d/M/yyyy HH:mm:ss}", item.PostedOn)</div>
+                <div class="cb"></div>
+
+
+            </li>
         }
-    </div>
+    </ul>
+
+    <div id="popup_container"></div>
 </div>

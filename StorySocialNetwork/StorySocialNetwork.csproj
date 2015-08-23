@@ -157,7 +157,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StorySNDataEFM.edmx</DependentUpon>
     </Compile>
-    <Compile Include="StorySNData\StoryData.cs" />
+    <Compile Include="StorySNData\StoryDataConvert.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>StorySNDataEFM.tt</DependentUpon>
     </Compile>
@@ -238,6 +238,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\story.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -272,8 +273,8 @@
     <Content Include="Views\Story\Stories.cshtml" />
     <Content Include="Views\Story\Groups.cshtml" />
     <Content Include="Views\Story\AddEditStory.cshtml" />
-    <Content Include="Views\Story\Story.cshtml" />
     <Content Include="Views\Story\LoginPage.cshtml" />
+    <Content Include="Views\Story\Story.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -286,6 +287,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\StortyBack.csproj">
+      <Project>{263df1ac-2c98-42a5-a1e0-fa8bf98d9f35}</Project>
+      <Name>StortyBack</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

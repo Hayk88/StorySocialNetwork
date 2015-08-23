@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="290b65d02c5d4a00806bdbbf97746091" Name="Diagram1" >
+        <EntityTypeShape EntityType="StorySNData.Group" Width="1.5" PointX="3.358401335477085" PointY="31.858924597436062" />
+        <EntityTypeShape EntityType="StorySNData.Story" Width="1.5" PointX="0.038196573051715539" PointY="28.674864439608" />
+        <EntityTypeShape EntityType="StorySNData.sysdiagram" Width="1.5" PointX="7.3524943270499321" PointY="10.488878672238849" />
+        <EntityTypeShape EntityType="StorySNData.User" Width="1.5" PointX="4.0649499520961889" PointY="7.5396621262373689" />
+        <AssociationConnector Association="StorySNData.FK_Stories_Users" />
+        <AssociationConnector Association="StorySNData.GroupStory" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

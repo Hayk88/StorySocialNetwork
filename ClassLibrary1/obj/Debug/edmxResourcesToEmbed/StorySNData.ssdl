@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StorySNData.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="StorySNDataStoreContainer">
+    <EntitySet Name="Groups" EntityType="StorySNData.Store.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupStory" EntityType="StorySNData.Store.GroupStory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stories" EntityType="StorySNData.Store.Stories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="StorySNData.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="StorySNData.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_GroupStory_Groups" Association="StorySNData.Store.FK_GroupStory_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="GroupStory" EntitySet="GroupStory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupStory_Stories" Association="StorySNData.Store.FK_GroupStory_Stories">
+      <End Role="Stories" EntitySet="Stories" />
+      <End Role="GroupStory" EntitySet="GroupStory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stories_Users" Association="StorySNData.Store.FK_Stories_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Stories" EntitySet="Stories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="GroupStory">
+    <Key>
+      <PropertyRef Name="GroupID" />
+      <PropertyRef Name="StoryID" />
+    </Key>
+    <Property Name="GroupID" Type="int" Nullable="false" />
+    <Property Name="StoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="StoryContent" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="PostedOn" Type="datetime" Nullable="false" />
+    <Property Name="UsersID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="15" />
+  </EntityType>
+  <Association Name="FK_GroupStory_Groups">
+    <End Role="Groups" Type="StorySNData.Store.Groups" Multiplicity="1" />
+    <End Role="GroupStory" Type="StorySNData.Store.GroupStory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GroupStory">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupStory_Stories">
+    <End Role="Stories" Type="StorySNData.Store.Stories" Multiplicity="1" />
+    <End Role="GroupStory" Type="StorySNData.Store.GroupStory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stories">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GroupStory">
+        <PropertyRef Name="StoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stories_Users">
+    <End Role="Users" Type="StorySNData.Store.Users" Multiplicity="1" />
+    <End Role="Stories" Type="StorySNData.Store.Stories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Stories">
+        <PropertyRef Name="UsersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
