@@ -25,19 +25,30 @@ function Search(serachText) {
     else {
         $('.story').show();
     }
-
+    var reg = new RegExp(search, "i")
     $(".story_title").each(function (index) {
-        var el = $(this);
-        var n = el.text().search(search);
-        if (n > -1) {
-            el.parent().show();
-        }
+        fundElement(this, reg, search);
     });
     $(".stroy_Description").each(function (index) {
-        var el = $(this);
-        var n = el.text().search(search);
-        if (n > -1)
-        { el.parent().show(); }
+        fundElement(this, reg, search);
     });
 
+}
+
+function raplaceSearchResults(text, search)
+{
+    var reg = new RegExp(search, "i")
+    text = text.replace(reg, "<span class='search_find'>" + search + "</span>");
+    return text;
+}
+
+function fundElement(element, reg, search)
+{
+    var el = $(element);
+    var eltext = el.text();
+    var n = eltext.search(reg);
+    if (n > -1) {
+        el.parent().show();
+        el.html(raplaceSearchResults(eltext, search));
+    }
 }
